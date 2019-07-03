@@ -11,9 +11,11 @@ notifications:
 before_install:
 - go get -u github.com/mitchellh/gox
 script:
-- env -u GOPATH gox -output='out/grpc_health_probe-{{.OS}}-{{.Arch}}' -rebuild -os=linux -arch="386 amd64 ppc64le arm arm64" -tags netgo -ldflags=-w
+- env -u GOPATH gox -output='out/grpc_health_probe-{{.OS}}-{{.Arch}}' -rebuild -os=linux
+  -arch="386 amd64 ppc64le arm arm64" -tags netgo -ldflags=-w
 deploy:
   on:
+    repo: p1c2u/grpc-health-probe
     tags: true
   provider: releases
   file_glob: true
@@ -22,4 +24,4 @@ deploy:
   options:
     prerelease: true
   api_key:
-    secure: "MT2E+Fep6autndkl0hyaTp+L21VqrBbA2kOsj03gLOsiL9vIDyOrXYu8OxVJHOG2ci2DK5GmIyOORzB5r3g4tOv/PInaQYrwf+tYhGdqNmMFc6uQmcXECFFtdcv8uhsY97ts7PKgFhT3E12yrYzKiZu86cfwOI6ZqYcTET4AFh1vYg/ji91dl0awLLa48E0loYMAN9+Y+COZWiH4YboJAs+TGsVIlTz4AZ3mZ0bJKAIlpmw3ZSZ5q9X9BGXq/gD010XHfK8D8P79fFT9hDrIz8Ioxrq9YFjAlxVzbijT/Vjeiem6Sim5q3+5Pn1NCLvDtkOUEy8ThlLKN5WLlouojOMxcTuCkjhaanLE45+USz6kKoj3bRPTOEWDYw8rZu808w/DnVFMRshvMapuBr/MTA5MK0Uth6muKz0bcWafo7Vw2J8yOy8ROC2MTXLcs6VGqcNNsm26fgpj/eGGSmjqSzQsEVk4G3gS1O42wqE/lCtLXsIfovz0ZKA32EOERSPfjNf3MEK9GybM10/T++iynjATpn9/6xFFFJktYBiqhE4zEIGx1fMATd/z9PMRaQLTtSFcO+9i4Cp4QiR84WikVEDJae37+jZlBiPi63Bh5MGHVXUMPR9m84V0GfYLbsSOMJ3QY69Cj8X1V/DIotHBVT5kshWKJ2myBYcj1UIYsSw="
+    secure: jNWeZ0fAKGHH7gLt34BggQ/VwAaX+0ePerpFsj5u0Ndqzb+4uFaQ0ZuJ187AgbOpyJQRUwk1EcKoL5ltQgP9KttuDd13w9t2qatb0BmeG3f/oFWwwh1uvqCqVYZDXcyqK/2haLA50gvndgtSgUwq8Esn27jWQHZgSd/LvsvNdeHZ5VJaWNcp7nq3DX3jdhNLwGt5YOiSjUzKXX7rU21yPbN6ezn87gpm58JUpY6zhVjYcKhFz9xui/cx6QejQH2n6BFQ+WKL0fS/p5M43f7fqb6ni6Ed/mBDuMqfN8qVVvUONlrS1ByMKyy0mr8KDOTcjtgqK5K0liRBRyiF61k94ofa1sGyZpSjlF+FOaofbsv1JKtQK1C1lcAwKLf4TEuhygBj5/3pgm+0PG92JKe6H5cWVQjMCbaCrV2yLXfvyr2drzRyZTlH6GGRJ2utYYQolbTBG2NT/D0esHkAS6tuWJBkIeOzpsySKWq9CFKotQv9n4Rt8qSLsSfJQxwFRga8daDdEV2W29f2XsHjp2YSRGCEPBBfwrqCg1lojQapZ6XDHWFIcmeHGNioVK2eDpb9+S5lt1IRVMH01RrqI6PzzQf2GgjFRQn+4/2wc2DJV1wbRNVhvNRrfNjnQZBU8bc5W/UvWNbrp3rUXhpF7aXWTVf93U0sX2dXl8ug4OdF5OQ=
