@@ -33,6 +33,14 @@ import (
 )
 
 var (
+	// Name of app
+	Name = "gRPC Health Probe"
+	// Version of app
+	Version string
+	// Build hash of app
+	Build string
+
+	flVersion       bool
 	flAddr          string
 	flService       string
 	flUserAgent     string
@@ -58,8 +66,13 @@ const (
 	StatusUnhealthy = 4
 )
 
+func printVersion() {
+	fmt.Fprintf(os.Stderr, "%s version %s, build %s\n", Name, Version, Build)
+}
+
 func init() {
 	log.SetFlags(0)
+	flag.BoolVar(&flVersion, "version", false, "Print version")
 	flag.StringVar(&flAddr, "addr", "", "(required) tcp host:port to connect")
 	flag.StringVar(&flService, "service", "", "service name to check (default: \"\")")
 	flag.StringVar(&flUserAgent, "user-agent", "grpc_health_probe", "user-agent header value of health check requests")
@@ -80,6 +93,11 @@ func init() {
 	argError := func(s string, v ...interface{}) {
 		log.Printf("error: "+s, v...)
 		os.Exit(StatusInvalidArguments)
+	}
+
+	if flVersion == true {
+		printVersion()
+		os.Exit(0)
 	}
 
 	if flAddr == "" {
